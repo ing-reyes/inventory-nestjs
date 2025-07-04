@@ -15,7 +15,6 @@ export class UserService {
 
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
-    private readonly bcryptAdapter: BcryptAdapter,
     // private readonly recordService: RecordService,
   ) { }
   async create(createUserDto: CreateUserDto) {
@@ -29,7 +28,7 @@ export class UserService {
 
       const user = await this.userModel.create({
         ...createUserDto,
-        password: this.bcryptAdapter.hash(password),
+        password: BcryptAdapter.hash(password),
         role: UserRoles.USER,
         active: true,
       });

@@ -1,7 +1,6 @@
 import { BadRequestException, CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtAdapter } from '../../common/adapters/jwt.adapter';
 import { UserService } from 'src/user/user.service';
-import { Request } from 'express';
 import { CustomError } from 'src/common/errors/custom.error';
 
 @Injectable()
@@ -13,7 +12,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(
     context: ExecutionContext,
   ): Promise<boolean> {
-    const request = context.switchToHttp().getRequest<Request>();
+    const request = context.switchToHttp().getRequest();
     const authorization = request.headers.authorization;
 
     try {

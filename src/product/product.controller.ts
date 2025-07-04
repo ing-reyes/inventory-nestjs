@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards, Quer
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Request } from 'express';
+// import { Request } from 'express';
 import { AuthGuard } from './../auth/guards/auth.guard';
 import { RoleGuard } from './../auth/guards/role.guard';
 import { PaginationDto } from './../common/dtos/pagination/pagination.dto';
@@ -21,7 +21,7 @@ export class ProductController {
   @Roles('ADMIN', 'ADMIN')
   create(
     @Body() createProductDto: CreateProductDto,
-    @Req() req: Request,
+    @Req() req,
   ) {
     return this.productService.create(createProductDto, req.userID);
   }
@@ -46,7 +46,7 @@ export class ProductController {
   update(
     @Param('id', ParseMongoIdPipe) id: string, 
     @Body() updateProductDto: UpdateProductDto,
-    @Req() req: Request,
+    @Req() req,
   ) {
     return this.productService.update(id, updateProductDto, req.userID);
   }
@@ -55,7 +55,7 @@ export class ProductController {
   @Delete(':id')
   @ApiHeader({name: 'token'})
   @Roles('ADMIN', 'ADMIN')
-  remove(@Param('id', ParseMongoIdPipe) id: string, @Req() req: Request) {
+  remove(@Param('id', ParseMongoIdPipe) id: string, @Req() req) {
     return this.productService.remove(id, req.userID);
   }
 }

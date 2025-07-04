@@ -18,7 +18,7 @@ export class UserService {
     // private readonly recordService: RecordService,
   ) { }
   async create(createUserDto: CreateUserDto) {
-    const { password, email } = createUserDto;
+    const { password, email, role } = createUserDto;
     try {
       const exists = await this.userModel.findOne({ email });
       if (exists) throw new CustomError({
@@ -29,7 +29,7 @@ export class UserService {
       const user = await this.userModel.create({
         ...createUserDto,
         password: BcryptAdapter.hash(password),
-        role: UserRoles.USER,
+        role: role || UserRoles.USER,
         active: true,
       });
       if (!user) throw new CustomError({

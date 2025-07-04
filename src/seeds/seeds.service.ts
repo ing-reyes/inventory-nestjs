@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRoles } from './../common/enums/roles.enum';
 import { UserService } from './../user/user.service';
-import { BcryptAdapter } from '../common/adapters/bcrypt.adapter';
 
 @Injectable()
 export class SeedsService {
@@ -15,7 +14,7 @@ export class SeedsService {
         const user = await this.userService.create({
             name: 'Administrador',
             email: 'admin@demo.com',
-            password: BcryptAdapter.hash('admin123'),
+            password: 'admin123',
             role: UserRoles.ADMIN,
         });
 

@@ -41,7 +41,6 @@ export class AuthService {
 
   async login(loginUserDto: LoginUserDto): Promise<AuthResponse> {
     const { email, password } = loginUserDto;
-    console.log({ email, password });
     try {
       const user = await this.userModel.findOne({ email });
       if (!user) throw new CustomError({

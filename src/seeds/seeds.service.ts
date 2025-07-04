@@ -12,13 +12,15 @@ export class SeedsService {
     async seed() {
 
         // Usuario por defecto
-        await this.userService.create({
+        const user = await this.userService.create({
             name: 'Administrador',
             email: 'admin@demo.com',
             password: BcryptAdapter.hash('admin123'),
             role: UserRoles.ADMIN,
-
         });
+
+        await user.save();
+
         console.log('Seed ejecutada correctamente');
     }
 }

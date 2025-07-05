@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsDate, IsNumber, IsOptional, IsString, Min, MinLength } from "class-validator";
+import { IsBoolean, IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Min, MinLength } from "class-validator";
+import { CategoriesDepartment } from "./../../common/enums/categories-departament.enum";
 
 export class CreateProductDto {
 
@@ -15,8 +16,9 @@ export class CreateProductDto {
     stock?: number;
     
     @ApiProperty()
-    @IsString()
-    category: string;
+    @IsEnum(CategoriesDepartment)
+    @IsNotEmpty()
+    category: CategoriesDepartment;
 
     @ApiProperty()
     @IsDate()

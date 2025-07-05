@@ -39,6 +39,12 @@ export class ProductController {
     return this.productService.findOne(id);
   }
 
+  @Get('category/:text')
+  @ApiHeader({name: 'token'})
+  findAllByCategory(@Param('text') category: string) {
+    return this.productService.findAllByCategory(category);
+  }
+
   @ApiParam({ name: 'id', type: String, description: 'Product ID' })
   @Patch(':id')
   @ApiHeader({name: 'token'})
@@ -57,5 +63,10 @@ export class ProductController {
   @Roles('ADMIN', 'ADMIN')
   remove(@Param('id', ParseMongoIdPipe) id: string, @Req() req) {
     return this.productService.remove(id, req.userID);
+  }
+
+  @Get('search/:term')
+  search(@Param('term') term: string){
+    return this.productService.search(term);
   }
 }

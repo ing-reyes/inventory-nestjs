@@ -74,6 +74,26 @@ export class ProductService {
     }
   }
 
+  async findAllByCategory(category: string):Promise<FindAllProductsResponse> {
+    try {
+
+      const [total, products] = await Promise.all([
+        this.productModel.countDocuments(),
+        this.productModel.find({ category })
+      ]);
+
+      return {
+        offset: 0,
+        limit: 10,
+        total: total,
+        page: 1,
+        data: products,
+      }
+    } catch (error) {
+      throw CustomError.createSignatureError(error.message);
+    }
+  }
+
   async update(id: string, updateProductDto: UpdateProductDto, userID: string) {
     try {
       const product = await this.productModel.findOneAndUpdate(
@@ -109,5 +129,18 @@ export class ProductService {
     } catch (error) {
       throw CustomError.createSignatureError(error.message);
     }
+  }
+
+  search(term: string){
+    // Crear una query para buscar las coincidencias en el nombre del producto
+    const regex = new RegExp(term, 'i'); // 'i' para hacer la búsqueda insensible a mayúsculas y minúsculas
+    return this.productModel.find({
+      $or: [
+        { name: regex },
+        { description: regex },
+        { category: regex },
+      ]
+    })
+    .exec();
   }
 }

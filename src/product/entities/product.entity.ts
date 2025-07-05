@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { Document } from "mongoose";
+import { CategoriesDepartment } from "src/common/enums/categories-departament.enum";
 
 @Schema()
 export class Product extends Document {
@@ -9,8 +10,8 @@ export class Product extends Document {
     @Prop({ type: Number, default: 0 })
     stock?: number;
 
-    @Prop({ type: mongoose.Types.ObjectId, ref: 'Category', required: [true, 'Category is required'], })
-    category: string;
+    @Prop({ type: String, enum: CategoriesDepartment, required: [true, 'Category is required'], })
+    category: CategoriesDepartment;
 
     @Prop({ type: Date, default: Date.now })
     entryDate: Date;

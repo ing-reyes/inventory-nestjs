@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards, Quer
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-// import { Request } from 'express';
 import { AuthGuard } from './../auth/guards/auth.guard';
 import { RoleGuard } from './../auth/guards/role.guard';
 import { PaginationDto } from './../common/dtos/pagination/pagination.dto';

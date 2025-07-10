@@ -106,6 +106,14 @@ export class BienestarSocialService {
         message: 'Bienestar Social not found!',
       });
 
+      const folderPath = path.resolve(__dirname + "./../../uploads/bienestar-social", bienestar.doc);
+
+      if (bienestar.doc) {
+        if (fs.existsSync(folderPath)) {
+          fs.unlinkSync(folderPath);
+        }
+      }
+
       return bienestar;
     } catch (error) {
       throw CustomError.createSignatureError(error.message);
@@ -142,10 +150,10 @@ export class BienestarSocialService {
     }
   }
 
-  async loadFile(filename: string){
+  async loadFile(filename: string) {
     try {
       const pathFolder = path.resolve(__dirname + './../../uploads/bienestar-social', filename)
-      if(!fs.existsSync(pathFolder)){
+      if (!fs.existsSync(pathFolder)) {
         return path.resolve(__dirname + './../../uploads/bienestar-social/default.pdf');
       }
 

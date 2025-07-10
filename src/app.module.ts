@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { SeedsModule } from './seeds/seeds.module';
+import { BienestarSocialModule } from './bienestar-social/bienestar-social.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { SeedsModule } from './seeds/seeds.module';
     UserModule, 
     CategoryModule, 
     ProductModule,
-    SeedsModule
+    SeedsModule,
+    BienestarSocialModule
   ],
 })
 export class AppModule {} 

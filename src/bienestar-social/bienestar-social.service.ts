@@ -121,7 +121,6 @@ export class BienestarSocialService {
   }
 
   async uploadFile(file: Express.Multer.File, id: string) {
-    console.log(file)
     try {
       const bienestar = await this.findOne(id);
 
